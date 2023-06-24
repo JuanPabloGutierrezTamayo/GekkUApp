@@ -27,10 +27,6 @@ export default function App() {
         <Stack.Screen 
           name="Menu"
           component={ MenuScreen }
-          screenOptions={{
-            headerStyle: { elevation: 0 },
-            cardStyle: { backgroundColor: '#2D5C44' }
-          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

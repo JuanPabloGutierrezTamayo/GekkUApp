@@ -48,12 +48,28 @@ const MenuScreen = () => {
       <View style={styles.notification}>
         <Text style={styles.text}>Próximas alertas</Text>
         <View style={styles.item_notifcaciones}>
-          <View style={styles.item_notifcaciones3}/>
-          <View style={styles.item_notifcaciones3}/>
+
+          <View style={styles.item_notifcaciones3}>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion}>Próximas alertas</Text>
+            </View>
+            <View style={styles.item_notifcaciones3}>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion}>Próximas alertas</Text>
+            </View>
+            
         </View>
         <Text style={styles.text}>Próximas clases</Text>
         <View style={styles.item_notifcaciones2}>
-          <View style={styles.item_notifcaciones3}/>
+
+          <View style={styles.item_notifcaciones3}>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
+            <Text style={styles.text_notificacion}>Próximas alertas</Text>
+            </View>
+
         </View>
       </View>
 
@@ -75,6 +91,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignItems: 'center',
     justifyContent: "center",
+  },
+  text_notificacion: {
+    color: 'white',
+    fontSize: 12,
+    height: '10%',
+    margin: 5,
+    marginTop:13
+    
+  },
+  text_notificacion2: {
+    color: 'white',
+    fontSize: 15,
+    height: '10%',
+    margin: 5
+    
   },
   image: {
     margin: 20,
@@ -133,6 +164,8 @@ const styles = StyleSheet.create({
     height: 75,
     margin: 20,
     backgroundColor: '#484848',
+    alignItems: 'left',
+    justifyContent: "top",
 
   },
 });
