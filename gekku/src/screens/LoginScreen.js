@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableNativeFeedback,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -38,9 +37,9 @@ const LoginScreen = () => {
         información académica y otra información relevante. Aquí podrás:
       </Text>
 
-      <TouchableNativeFeedback onPress={changeText}>
+      <TouchableOpacity onPress={changeText} style={loginStyles.card}>
         <Text style={loginStyles.textCard}>{functions[count]}</Text>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
 
       <View style={loginStyles.line} />
 
@@ -105,18 +104,20 @@ const loginStyles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
   },
-  textCard: {
-    width: "75%",
-    margin: "1%",
+  card: {
+    width: "70%",
     height: 60,
-    fontSize: 16,
+    justifyContent: "center",
     backgroundColor: "#2D5C44",
-    color: "#FFF",
     borderRadius: 10,
-    textAlignVertical: "center",
-    // justifyContent: "center",
+  },
+  textCard: {
+    width: "100%",
+    margin: "1%",
+    padding: "2%",
+    fontSize: 16,
+    color: "#FFF",
     textAlign: "center",
-    // alignItems: "center",
   },
   line: {
     width: "85%",
