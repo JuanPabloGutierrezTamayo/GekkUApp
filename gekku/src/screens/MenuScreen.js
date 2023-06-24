@@ -10,36 +10,36 @@ const MenuScreen = () => {
         <View style={styles.menu}>
           <View style={styles.row}>
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
+              </View>
             </TouchableOpacity> 
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/calc.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/calc.png")} />
+              </View>
             </TouchableOpacity> 
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/event.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/event.png")} />
+              </View>
             </TouchableOpacity> 
           </View>
           <View style={styles.row}>
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/not.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/not.png")} />
+              </View>
             </TouchableOpacity> 
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/bus.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/bus.png")} />
+              </View>
             </TouchableOpacity> 
             <TouchableOpacity>
-            <View style={styles.item} >
-              <Image style={styles.image} source={require("../../assets/MenuIcons/map.png")} />
-            </View>
+              <View style={styles.item} >
+                <Image style={styles.image} source={require("../../assets/MenuIcons/map.png")} />
+              </View>
             </TouchableOpacity> 
           </View>
           
