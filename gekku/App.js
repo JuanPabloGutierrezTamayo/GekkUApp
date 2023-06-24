@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./src/screens/LoginScreen";
 import StartScreen from "./src/screens/StartScreen";
+import MenuScreen from "./src/screens/MenuScreen";
 
 const Stack = createStackNavigator();
 
@@ -10,9 +11,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Menu"
         screenOptions={{
-          headerShown: false
+          headerShown: true
         }}
       >
         <Stack.Screen 
@@ -22,6 +23,14 @@ export default function App() {
         <Stack.Screen 
           name="Start"
           component={ StartScreen }
+        />
+        <Stack.Screen 
+          name="Menu"
+          component={ MenuScreen }
+          screenOptions={{
+            headerStyle: { elevation: 0 },
+            cardStyle: { backgroundColor: '#2D5C44' }
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
