@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./src/screens/LoginScreen";
 import MenuScreen from "./src/screens/MenuScreen";
-import MenuScreen from "./src/screens/AcademicScreen";
+import AcademicScreen from "./src/screens/AcademicScreen";
 
 const Stack = createStackNavigator();
 
@@ -11,7 +11,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Academic"
         screenOptions={{
           headerShown: false
         }}
