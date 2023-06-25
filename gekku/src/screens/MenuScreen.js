@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-    height: 20,
     marginTop: 10,
     marginBottom: 10,
     alignItems: 'center',
@@ -94,16 +93,14 @@ const styles = StyleSheet.create({
   text_notificacion: {
     color: 'white',
     fontSize: 12,
-    height: '10%',
-    margin: 5,
-    marginTop:13
-    
+    marginLeft: 5,
+    marginTop: '0.5%',
   },
   text_notificacion2: {
     color: 'white',
     fontSize: 15,
-    height: '10%',
-    margin: 5
+    marginLeft: 5,
+    marginTop: '0.5%',
     
   },
   image: {
@@ -154,7 +151,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
-    justifyContent: "center",
+    justifyContent: 'center',
 
   },
   item_notifcaciones3: {
