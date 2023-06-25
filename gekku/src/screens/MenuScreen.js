@@ -44,7 +44,7 @@ const MenuScreen = () => {
           </View>
           
         </View>
-
+        
       <View style={styles.notification}>
         <Text style={styles.text}>Próximas alertas</Text>
         <View style={styles.item_notifcaciones}>
@@ -72,7 +72,6 @@ const MenuScreen = () => {
 
         </View>
       </View>
-
       </ImageBackground>
     </View>
   );
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   menu: {
-    marginTop: 10,
+    marginTop: 40,
     alignItems: 'center',
     justifyContent: "center",
   },
@@ -164,9 +163,6 @@ const styles = StyleSheet.create({
     height: 75,
     margin: 20,
     backgroundColor: '#484848',
-    alignItems: 'left',
-    justifyContent: "top",
-
   },
 });
 
