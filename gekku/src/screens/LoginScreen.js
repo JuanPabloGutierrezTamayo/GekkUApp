@@ -4,11 +4,11 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import CheckBox from "expo-checkbox";
+
+import Login from "../components/Login";
 
 const functions = [
   "Consultar tu historia académica",
@@ -21,10 +21,23 @@ const functions = [
 const LoginScreen = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [isSelected, setSelection] = useState(false);
+  
   const [count, setCount] = useState(0);
 
+  // const [token, ] = useContext(UserContext);
+
   const changeText = () => count >= functions.length - 1 ? setCount(0) : setCount(count + 1);
+
+  // const login = async () => {
+  //   const requestOptions = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     }
+  //   };
+
+  //   const response = await fetch("/api/student")
+  // }
 
   return (
     <View style={loginStyles.container}>
@@ -44,7 +57,8 @@ const LoginScreen = () => {
       <View style={loginStyles.line} />
 
       <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
-      <View style={loginStyles.inputView}>
+      <Login />
+      {/* <View style={loginStyles.inputView}>
         <TextInput
           style={loginStyles.textInput}
           placeholder="Usuario (sin @unal.edu.co)"
@@ -75,7 +89,7 @@ const LoginScreen = () => {
       </TouchableOpacity> 
       <TouchableOpacity style={[loginStyles.loginBtn, loginStyles.login2Btn]}>
         <Text style={loginStyles.loginText}>Iniciar sin conexión</Text> 
-      </TouchableOpacity> 
+      </TouchableOpacity>  */}
     </View> 
   );
 }
@@ -126,53 +140,12 @@ const loginStyles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: "dashed",
   },
-  inputView: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  textInput: {
-    flex: 1,
-    width: "99%",
-    textAlign: "center",
-  },
   text: {
     fontSize: 19,
     fontWeight: "600",
-    marginBottom: 10,
+    // marginBottom: 4,
     textAlign: "center",
   },
-  loginBtn: {
-    width: "40%",
-    borderRadius: 10,
-    height: 45,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "5%",
-    backgroundColor: "#37AD5F",
-  },
-  login2Btn: {
-    margin: "1%",
-    backgroundColor: "#00796B",
-  },
-  loginText: {
-    color: "#fff",
-    fontSize: 15,
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  checkbox: {
-    margin: 5,
-  },
-  label: {
-    textAlign: "center",
-    fontSize: 15,
-  }
 });
 
 export default LoginScreen;

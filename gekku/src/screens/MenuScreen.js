@@ -44,7 +44,7 @@ const MenuScreen = () => {
           </View>
           
         </View>
-
+        
       <View style={styles.notification}>
         <Text style={styles.text}>Próximas alertas</Text>
         <View style={styles.item_notifcaciones}>
@@ -72,7 +72,6 @@ const MenuScreen = () => {
 
         </View>
       </View>
-
       </ImageBackground>
     </View>
   );
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-    height: 20,
     marginTop: 10,
     marginBottom: 10,
     alignItems: 'center',
@@ -95,16 +93,14 @@ const styles = StyleSheet.create({
   text_notificacion: {
     color: 'white',
     fontSize: 12,
-    height: '10%',
-    margin: 5,
-    marginTop:13
-    
+    marginLeft: 5,
+    marginTop: '0.5%',
   },
   text_notificacion2: {
     color: 'white',
     fontSize: 15,
-    height: '10%',
-    margin: 5
+    marginLeft: 5,
+    marginTop: '0.5%',
     
   },
   image: {
@@ -112,9 +108,10 @@ const styles = StyleSheet.create({
     width: '75%',
     height: '80%',
     justifyContent: "center",
+    resizeMode: 'contain',
   },
   menu: {
-    marginTop: 10,
+    marginTop: 40,
     alignItems: 'center',
     justifyContent: "center",
   },
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
-    justifyContent: "center",
+    justifyContent: 'center',
 
   },
   item_notifcaciones3: {
@@ -164,9 +161,6 @@ const styles = StyleSheet.create({
     height: 75,
     margin: 20,
     backgroundColor: '#484848',
-    alignItems: 'left',
-    justifyContent: "top",
-
   },
 });
 
