@@ -7,8 +7,10 @@ import fastapi.security as _security
 oauth2schema = _security.OAuth2PasswordBearer(tokenUrl="/api/token")
 JWT_SECRET = "myjwtsecret"
 
+
 def create_database():
     return _database.Base.metadata.create_all(bind= _database.engine)
+
 
 def get_db():
     db = _database.SessionLocal()
@@ -16,6 +18,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
 
 async def get_student_by_email(email: str, db: _orm.Session):
     return db.query(_models.Student).filter(_models.Student.email == email).first()
@@ -30,11 +33,13 @@ async def authenticate_student(email:str, password:str, db: _orm.Session):
 
     return student
 
+
 async def create_token(student: _models.Student):
     student_obj = _schemas.Student.from_orm(student)
     token = _jwt.encode(student_obj.dict(), JWT_SECRET)
 
     return dict(access_token=token, token_type="bearer")
+
 
 async def get_current_student(db: _orm.Session = _fastapi.Depends(get_db), token:str = _fastapi.Depends(oauth2schema)):
     try:
@@ -45,6 +50,7 @@ async def get_current_student(db: _orm.Session = _fastapi.Depends(get_db), token
     
     return _schemas.Student.from_orm(student)
 
+
 async def create_alert(student: _schemas.Student, db: _orm.Session, alert: _schemas.AlertCreate):
     alert = _models.Alert(**alert.dict(), student_id = student.id)
     db.add(alert)
@@ -52,10 +58,52 @@ async def create_alert(student: _schemas.Student, db: _orm.Session, alert: _sche
     db.refresh(alert)
     return _schemas.Alert.from_orm(alert)
 
-async def get_alert(student: _schemas.Student, db: _orm.Session):
+# Alerts
+## Get all alerts
+async def get_all_alerts(student: _schemas.Student, db: _orm.Session):
     alerts = db.query(_models.Alert).filter_by(student_id=student.id)
     return list(map(_schemas.Alert.from_orm, alerts))
 
+## Selector for CRUD
+async def alert_selector(alert_id: int, student: _schemas.Student, db: _orm.Session):
+    alert = (
+        db.query(_models.Alert)
+        .filter_by(student_id=student.id)
+        .filter(_models.Alert.id == alert_id)
+        .first()
+    )
+
+    if alert is None:
+        raise _fastapi.HTTPException(status_code=404, detail="This alert doesn't exist")
+
+    return alert
+
+## Get a single alert
+async def get_alert(alert_id: int, student: _schemas.Student, db: _orm.Session):
+    alert = await alert_selector(alert_id=alert_id, student=student, db=db)
+    return _schemas.Lead.from_orm(alert)
+
+## Delete a single alert
+async def delete_alert(alert_id: int, student: _schemas.Student, db: _orm.Session):
+    alert = await alert_selector(alert_id, student, db)
+    db.delete(alert)
+    db.commit()
+
+## Update an alert
+async def update_alert(alert_id: int, alert: _schemas.AlertCreate, student: _schemas.Student, db: _orm.Session):
+    alert_db = await alert_selector(alert_id, student, db)
+
+    alert_db.title = alert.title
+    alert_db.topic = alert.topic
+    alert_db.note = alert.note
+    alert_db.date = alert.date
+
+    db.commit()
+    db.refresh(alert_db)
+
+    return _schemas.Alert.from_orm(alert_db)
+
+# Career
 async def get_career(student: _schemas.Student, db: _orm.Session):
     careers = db.query(_models.Career).filter_by(student_id=student.id)
     return list(map(_schemas.Career.from_orm, careers))
