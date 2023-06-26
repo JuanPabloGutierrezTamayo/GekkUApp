@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     width: '75%',
     height: '80%',
     justifyContent: "center",
+    resizeMode: 'contain',
   },
   menu: {
     marginTop: 40,
