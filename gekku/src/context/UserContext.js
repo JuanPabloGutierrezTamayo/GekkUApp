@@ -1,7 +1,8 @@
 import React, { useState, useEffect, createContext } from 'react';
 import ReactDOM from "react-dom";
 
-export const UserContext = createContext([[], () => {}]);
+// export const UserContext = createContext([[], () => {}]);
+export const UserContext = createContext();
 
 export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem('sessionToken'));

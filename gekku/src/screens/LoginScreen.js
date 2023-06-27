@@ -43,40 +43,8 @@ const LoginScreen = ({ navigation }) => {
       <View style={loginStyles.line} />
 
       <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
-      <Login navigation={navigation} />
       
-      {/* <View style={loginStyles.inputView}>
-        <TextInput
-          style={loginStyles.textInput}
-          placeholder="Usuario (sin @unal.edu.co)"
-          placeholderTextColor="#8B8B8B"
-          onChangeText={(user) => setUser(user)}
-        /> 
-      </View> 
-      <View style={loginStyles.inputView}>
-        <TextInput
-          style={loginStyles.textInput}
-          placeholder="Contraseña"
-          placeholderTextColor="#8B8B8B"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        /> 
-      </View>
-      <View style={loginStyles.checkboxContainer}>
-        <CheckBox
-          disabled={false}
-          value={isSelected}
-          onValueChange={setSelection}
-          style={loginStyles.checkbox}
-        />
-        <Text style={loginStyles.label}>Recordar contraseña</Text> 
-      </View>
-      <TouchableOpacity style={loginStyles.loginBtn}>
-        <Text style={loginStyles.loginText}>Iniciar sesión</Text> 
-      </TouchableOpacity> 
-      <TouchableOpacity style={[loginStyles.loginBtn, loginStyles.login2Btn]}>
-        <Text style={loginStyles.loginText}>Iniciar sin conexión</Text> 
-      </TouchableOpacity>  */}
+      <Login navigation={navigation} />
     </View> 
   );
 }
@@ -92,6 +60,7 @@ const loginStyles = StyleSheet.create({
     marginBottom: 20,
     width: "35%",
     height: "16%",
+    resizeMode: "contain",
   },
   name: {
     fontSize: 30,

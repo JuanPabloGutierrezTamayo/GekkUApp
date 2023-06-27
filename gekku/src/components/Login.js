@@ -33,10 +33,8 @@ const Login = ({ navigation }) => {
           mode: 'cors',
           body: JSON.stringify(`grant_type=&username=${user}&password=${password}&scope=&client_id=&client_secret=`)
         };
-        console.log(user, password);
         const response = await fetch("http://localhost:8000/api/token", requestOptions);
         const data = await response.json();
-        console.log(response);
     
         if(!response.ok) {
           setErrorMessage(data.detail);
