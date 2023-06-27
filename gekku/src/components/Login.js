@@ -17,31 +17,32 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  // const [, setToken] = useContext(UserContext);
+  const [token, setToken] = useContext(UserContext);
 
   const [isSelected, setSelection] = useState(false);
 
-  const submitLogin = async () => {
-    const requestOptions = {
-      method: "POST",
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      body: JSON.stringify(`grant_type=&username=${user}&password=${password}&scope=&client_id=&client_secret=`)
-    };
+  // const submitLogin = async () => {
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: {"Content-Type": "application/x-www-form-urlencoded"},
+  //     mode: 'cors',
+  //     body: JSON.stringify(`grant_type=&username=${user}&password=${password}&scope=&client_id=&client_secret=`)
+  //   };
 
-    const response = await fetch("http://localhost:8000/api/token", requestOptions);
-    const data = await response.json();
+  //   const response = await fetch("http://localhost:8000/api/token", requestOptions);
+  //   const data = await response.json();
 
-    if(!response.ok) {
-      setErrorMessage(data.detail);
-    } else {
-      // setToken(data.access_token);
-    }
-  }
+  //   if(!response.ok) {
+  //     setErrorMessage(data.detail);
+  //   } else {
+  //     setToken(data.access_token);
+  //   }
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    submitLogin();
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   submitLogin();
+  // }
 
   return (
     <Formik
@@ -53,11 +54,13 @@ const Login = () => {
         const requestOptions = {
           method: "POST",
           headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          mode: 'cors',
           body: JSON.stringify(`grant_type=&username=${user}&password=${password}&scope=&client_id=&client_secret=`)
         };
         console.log(user, password);
-        const response = await fetch("/api/token", requestOptions);
+        const response = await fetch("http://localhost:8000/api/token", requestOptions);
         const data = await response.json();
+        console.log(response);
     
         if(!response.ok) {
           setErrorMessage(data.detail);

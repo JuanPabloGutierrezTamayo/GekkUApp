@@ -1,4 +1,5 @@
 import fastapi as _fastapi
+from fastapi.middleware.cors import CORSMiddleware
 import fastapi.security as _security
 import sqlalchemy.orm as _orm
 import database as _database
@@ -6,6 +7,18 @@ import services as _services, schemas as _schemas
 from typing import List
 
 app = _fastapi.FastAPI()
+
+origins = [
+    "http://localhost:19006",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Authentication token
 @app.post("/api/token")
