@@ -47,3 +47,15 @@ async def update_alert(alert_id: int,alert: _schemas.AlertCreate,student: _schem
 @app.get("/api/careers", response_model=list[_schemas.Career])
 async def get_career(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
     return await _services.get_career(student=student, db=db)
+
+# Academic history
+@app.get("/api/academic", response_model=_schemas.AcademicHistory)
+async def get_history(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    career = (await get_career(student=student, db=db))[0]
+    return await _services.get_history(career=career, db=db)
+
+# Subjects
+@app.get("/api/subjects", response_model=list[_schemas.Subject])
+async def get_subject(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    history = await get_history(student=student, db=db)
+    return await _services.get_subjects(history=history, db=db)
