@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView} from 'react-native';
+import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView,} from 'react-native';
 // import CircularProgress from 'react-native-circular-progress-indicator';
 
 
@@ -21,11 +21,9 @@ const AcademicScreen = () => {
         </View>
 
         <View style={styles.promedio}>
-          <View style={styles.row}>
             <Text style={styles.text}>Próximas alertas</Text>
-            <Image margin={'10%'} source={require("../../assets/AcademicIcons/Line1.png")}  />
+            
             <Text style={styles.text}>Próximas alertas</Text>
-          </View>
         </View>
 
         <View style={styles.creditos}>
@@ -42,7 +40,7 @@ const AcademicScreen = () => {
             valueSuffix={'%'}
           /> */}
 
-          <View width={'100%'} alignItems={'baseline'}>
+          <View style={{flexShrink:1,padding:10}}>
             <Text style={styles.text_creditos}>Créditos cursados:</Text>
             <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
             <Text style={styles.text_creditos2}>Fundamentación optativas:</Text>
@@ -58,11 +56,7 @@ const AcademicScreen = () => {
         <View style={styles.asignaturas}>
           <View style={styles.row} margin={'10%'}>
             <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
-            <TouchableOpacity>
-              <View>
-                <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
-              </View>
-            </TouchableOpacity>
+
           </View>
             <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
@@ -133,6 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "center",
     alignItems: 'center',
+    flex:1,
   },
   student: {
     borderRadius: 20,
@@ -158,16 +153,19 @@ const styles = StyleSheet.create({
     width: '90%',
     // height: 100,
     margin: 10,
+    padding:10,
     justifyContent: "center",
   },
   promedio: {
     borderRadius: 30,
     backgroundColor: '#D9D9D9',
     width: '90%',
-    height: 100,
+    padding:50,
     margin: 5,
     alignItems:'center',
-    justifyContent: 'center'
+    justifyContent: 'space-evenly',
+    flex:1,
+    flexDirection:'row',
   },
   creditos: {
     borderRadius: 30,
@@ -200,8 +198,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     flex:1,
-
-    
   },
   nota_asignatura: {
     borderTopRightRadius:30,
