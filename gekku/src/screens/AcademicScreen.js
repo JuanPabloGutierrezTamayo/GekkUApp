@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -18,10 +18,13 @@ const AcademicScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [university, setUniversity] = useState("");
+  const [pa, setPA] = useState(0);
+  const [papa, setPAPA] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getStudentInfo();
+    getGrades();
   }, []);
 
   const getStudentInfo = async () => {
@@ -45,6 +48,26 @@ const AcademicScreen = () => {
     }
   }
   
+  const getGrades = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    };
+
+    const response = await fetch("http://localhost:8000/api/academic", requestOptions)
+
+    if(!response.ok) {
+      setErrorMessage("Could not get the information");
+    } else {
+      const data = await response.json();
+      setPA(data.pa);
+      setPAPA(data.papa);
+    }
+  }
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -52,22 +75,28 @@ const AcademicScreen = () => {
           <Image style={styles.image} source={require("../../assets/Academic-icon.png")}  />
           
           <View style={styles.info_Student}>
-            <ErrorMessage message={errorMessage}/>
-            <Text style={styles.text}>{name}</Text>
-            <Text style={styles.text}>{email}</Text>
-            <Text style={styles.text}>{university}</Text>
-            <Text style={styles.text}>Ingenieria de sistemas</Text>
+            {errorMessage != "" ? 
+              <ErrorMessage message={errorMessage}/>
+            :
+              <>
+                <Text style={styles.text}>{name}</Text>
+                <Text style={styles.text}>{email}</Text>
+                <Text style={styles.text}>{university}</Text>
+                <Text style={styles.text}>Ingenieria de sistemas</Text>
+              </>
+            }
+            
           </View>
         </View>
 
         <View style={styles.promedio}>
             <View >
-              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>{parseFloat(papa)}</Text>
               <Text style={{fontSize:30,textAlign:'center'}}>P.A.P.A</Text> 
             </View>
 
             <View>
-              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>{pa}</Text>
               <Text style={{fontSize:30,textAlign:'center'}}>P.A</Text> 
             </View>
         </View>
