@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView} from 'react-native';
-import CircularProgress from 'react-native-circular-progress-indicator';
+// import CircularProgress from 'react-native-circular-progress-indicator';
 
 
 const a = [3, 4, 3, 3, 2];
@@ -30,7 +30,7 @@ const AcademicScreen = () => {
 
         <View style={styles.creditos}>
           <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
-          <CircularProgress
+          {/* <CircularProgress
             value={50}
             radius={100}
             inActiveStrokeColor={'#FFFFFF'}
@@ -40,7 +40,7 @@ const AcademicScreen = () => {
             inActiveStrokeOpacity={0.2}
             progressValueColor={'#000000'}
             valueSuffix={'%'}
-          />
+          /> */}
 
           <View width={'100%'} alignItems={'baseline'}>
             <Text style={styles.text_creditos}>Créditos cursados:</Text>
@@ -59,16 +59,18 @@ const AcademicScreen = () => {
           <View style={styles.row} margin={'10%'}>
             <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
             <TouchableOpacity>
-              <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
+              <View>
+                <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
+              </View>
             </TouchableOpacity>
           </View>
             <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
           {React.Children.toArray(a.map((creditos) => {
             return (
-              <View style={styles.asignaturas2} flexDirection={'row'}>
-                <View alignItems={'baseline'} width={'78%'}>
-                  <Text style={styles.text_asignaturas2}>Ciencias de la computacion y aplicaciones moviles </Text>
+              <View style={styles.asignaturas2}>
+                <View style={{flexShrink:1,padding:10}} >
+                  <Text style={styles.text_asignaturas2}>Ciencias de la computacion y aplicaciones </Text>
                   <Text style={styles.text_asignaturas2} keys={creditos}>Créditos: {creditos} </Text>
                 </View>
                 <View style={styles.nota_asignatura} >
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
     // height: 500,
     margin: 5,
     marginBottom: 10,
-    alignItems:'center',
+    alignItems:'baseline',
     justifyContent: 'flex-start'
   },
   asignaturas: {
@@ -197,13 +199,16 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    flex:1,
+
+    
   },
   nota_asignatura: {
     borderTopRightRadius:30,
     borderBottomRightRadius:30,
-    width:70,
+    width:'20%',
     height:'100%',
-    backgroundColor: 'green',
+    backgroundColor: '#8BE189',
     alignItems:'center',
     justifyContent: 'center'
   },
