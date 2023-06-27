@@ -18,26 +18,12 @@ const functions = [
   "Visualizar los horarios de las rutas intercampus"
 ]
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  
   const [count, setCount] = useState(0);
 
-  // const [token, ] = useContext(UserContext);
-
   const changeText = () => count >= functions.length - 1 ? setCount(0) : setCount(count + 1);
-
-  // const login = async () => {
-  //   const requestOptions = {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     }
-  //   };
-
-  //   const response = await fetch("/api/student")
-  // }
 
   return (
     <View style={loginStyles.container}>
@@ -57,7 +43,8 @@ const LoginScreen = () => {
       <View style={loginStyles.line} />
 
       <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
-      <Login />
+      <Login navigation={navigation} />
+      
       {/* <View style={loginStyles.inputView}>
         <TextInput
           style={loginStyles.textInput}

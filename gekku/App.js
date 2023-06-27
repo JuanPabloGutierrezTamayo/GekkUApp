@@ -16,11 +16,11 @@ export default function App() {
           headerShown: false
         }}
       >
-        <Stack.Screen 
+        <Stack.Screen
           name="Login"
           component={ LoginScreen }
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="Menu"
           component={ MenuScreen }
         />

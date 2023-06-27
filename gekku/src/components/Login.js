@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import CheckBox from "expo-checkbox";
@@ -13,36 +12,13 @@ import { Formik } from 'formik'
 import ErrorMessage from './ErrorMessage';
 import { UserContext } from '../context/UserContext';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [token, setToken] = useContext(UserContext);
 
   const [isSelected, setSelection] = useState(false);
-
-  // const submitLogin = async () => {
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: {"Content-Type": "application/x-www-form-urlencoded"},
-  //     mode: 'cors',
-  //     body: JSON.stringify(`grant_type=&username=${user}&password=${password}&scope=&client_id=&client_secret=`)
-  //   };
-
-  //   const response = await fetch("http://localhost:8000/api/token", requestOptions);
-  //   const data = await response.json();
-
-  //   if(!response.ok) {
-  //     setErrorMessage(data.detail);
-  //   } else {
-  //     setToken(data.access_token);
-  //   }
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   submitLogin();
-  // }
 
   return (
     <Formik
@@ -66,6 +42,7 @@ const Login = () => {
           setErrorMessage(data.detail);
         } else {
           setToken(data.access_token);
+          navigation.navigate("Menu");
         }
       }}
     >

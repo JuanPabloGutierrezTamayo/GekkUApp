@@ -1,7 +1,18 @@
-import React from 'react';
-import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground} from 'react-native';
+import React, { useContext } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground
+} from 'react-native';
 
-const MenuScreen = () => {
+import { UserContext } from '../context/UserContext';
+
+const MenuScreen = ({ navigation }) => {
+  const [token, setToken] = useContext(UserContext);
+
   return (
     <View style={styles.container}>
 
@@ -9,7 +20,7 @@ const MenuScreen = () => {
 
         <View style={styles.menu}>
           <View style={styles.row}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Academic")}>
               <View style={styles.item} >
                 <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
               </View>
@@ -53,32 +64,34 @@ const MenuScreen = () => {
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion}>Próximas alertas</Text>
-            </View>
-            <View style={styles.item_notifcaciones3}>
+          </View>
+
+          <View style={styles.item_notifcaciones3}>
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion}>Próximas alertas</Text>
-            </View>
+          </View>
             
         </View>
+
         <Text style={styles.text}>Próximas clases</Text>
+
         <View style={styles.item_notifcaciones2}>
 
           <View style={styles.item_notifcaciones3}>
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion2}>Próximas alertas</Text>
             <Text style={styles.text_notificacion}>Próximas alertas</Text>
-            </View>
+          </View>
 
         </View>
       </View>
-      </ImageBackground>
-    </View>
+    </ImageBackground>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
   },
@@ -101,7 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginLeft: 5,
     marginTop: '0.5%',
-    
   },
   image: {
     margin: 20,
@@ -133,7 +145,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: "center",
     margin: '5%',
-    
   },
   item_notifcaciones: {
     borderRadius: 15,
@@ -143,7 +154,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: "center",
-
   },
   item_notifcaciones2: {
     borderRadius: 15,
@@ -153,7 +163,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   item_notifcaciones3: {
     borderRadius: 15,
