@@ -26,10 +26,22 @@ async def get_student(student: _schemas.Student= _fastapi.Depends(_services.get_
 async def create_alert(alert: _schemas.AlertCreate, student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
     return await _services.create_alert(student=student, db=db, alert=alert)
 
-# Alert data
+# Get Alert
 @app.get("/api/alerts", response_model=list[_schemas.Alert])
-async def get_alert(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
-    return await _services.get_alert(student=student, db=db)
+async def get_all_alerts(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    return await _services.get_all_alerts(student=student, db=db)
+
+# Delete Alert
+@app.delete("/api/alerts/{alert_id}", status_code=204)
+async def delete_alert(alert_id: int, student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session = _fastapi.Depends(_services.get_db)):
+    await _services.delete_alert(alert_id, student, db)
+    return {"message", "Successfully Deleted"}
+
+# Update Alert
+@app.put("/api/alerts/{alert_id}", status_code=200)
+async def update_alert(alert_id: int,alert: _schemas.AlertCreate,student: _schemas.Student = _fastapi.Depends(_services.get_current_student),db: _orm.Session = _fastapi.Depends(_services.get_db)):
+    await _services.update_alert(alert_id, alert, student, db)
+    return {"message", "Successfully Updated"}
 
 # Career data
 @app.get("/api/careers", response_model=list[_schemas.Career])
