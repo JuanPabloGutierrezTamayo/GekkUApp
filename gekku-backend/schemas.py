@@ -34,7 +34,7 @@ class Career(_CareerBase):
 
 # Schemas for Academic History
 class _AcademicHistoryBase(_pydantic.BaseModel):
-    total_credits: dict
+    total_credits: int
 
 class AcademicHistoryCreate(_AcademicHistoryBase):
     pass
@@ -43,8 +43,9 @@ class AcademicHistory(_AcademicHistoryBase):
     id: int
     papa: float
     pa: float
-    completed_credits: dict
-           
+    completed_credits: int
+    class Config:
+        orm_mode = True
 
 # Schemas for Subject
 class _SubjectBase(_pydantic.BaseModel):
@@ -59,6 +60,8 @@ class SubjectCreate(_SubjectBase):
 
 class Subject(_SubjectBase):
     final_grade: float
+    class Config:
+        orm_mode = True
 
 # Schemas for Alerts
 class _AlertBase(_pydantic.BaseModel):

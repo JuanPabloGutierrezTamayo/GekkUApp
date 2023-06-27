@@ -36,8 +36,8 @@ class AcademicHistory(_database.Base):
     id = _sql.Column(_sql.Integer, primary_key=True, index=True)
     papa = _sql.Column(_sql.Float)
     pa = _sql.Column(_sql.Float)
-    total_credits = _sql.Column(_sql.JSON)
-    completed_credits = _sql.Column(_sql.JSON)
+    total_credits = _sql.Column(_sql.Integer)
+    completed_credits = _sql.Column(_sql.Integer)
     career_id = _sql.Column(_sql.Integer, _sql.ForeignKey("careers.id"))
 
     career = _orm.relationship("Career", back_populates="history") # Relacion con careers

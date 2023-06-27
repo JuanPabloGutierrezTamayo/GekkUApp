@@ -107,3 +107,13 @@ async def update_alert(alert_id: int, alert: _schemas.AlertCreate, student: _sch
 async def get_career(student: _schemas.Student, db: _orm.Session):
     careers = db.query(_models.Career).filter_by(student_id=student.id)
     return list(map(_schemas.Career.from_orm, careers))
+
+# Academic history
+async def get_history(career: _schemas.Career, db: _orm.Session):
+    history = db.query(_models.AcademicHistory).filter_by(career_id = career.id).first()
+    return _schemas.AcademicHistory.from_orm(history)
+
+# Subject
+async def get_subjects(history: _schemas.AcademicHistory, db: _orm.Session):
+    subjects = db.query(_models.Subject).filter_by(history_id = history.id)
+    return list(map(_schemas.Subject.from_orm, subjects))
