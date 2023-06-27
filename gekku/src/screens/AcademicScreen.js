@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView} from 'react-native';
-// import CircularProgress from 'react-native-circular-progress-indicator';
-
+import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView,} from 'react-native';
+import CircularProgress from 'react-native-circular-progress-indicator';
 
 const a = [3, 4, 3, 3, 2];
 
+
 const AcademicScreen = () => {
+  const progress = 0.75; // Define el progreso de la barra (valor entre 0 y 1)
+  const radius = 100; // Define el radio del círculo de progreso
+  const strokeWidth = 10; // Define el grosor del borde de la barra de progreso
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -21,28 +24,36 @@ const AcademicScreen = () => {
         </View>
 
         <View style={styles.promedio}>
-          <View style={styles.row}>
-            <Text style={styles.text}>Próximas alertas</Text>
-            <Image margin={'10%'} source={require("../../assets/AcademicIcons/Line1.png")}  />
-            <Text style={styles.text}>Próximas alertas</Text>
-          </View>
+            <View >
+              <Text  style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text  style={{fontSize:30,textAlign:'center'}}>P.A.P.A</Text> 
+            </View>          
+            <View>
+              <Text  style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text  style={{fontSize:30,textAlign:'center'}}>P.A</Text> 
+            </View>
         </View>
 
         <View style={styles.creditos}>
-          <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
-          {/* <CircularProgress
-            value={50}
-            radius={100}
-            inActiveStrokeColor={'#FFFFFF'}
-            activeStrokeColor={'#97C593'}
-            activeStrokeWidth={30}
-            inActiveStrokeWidth={30}
-            inActiveStrokeOpacity={0.2}
-            progressValueColor={'#000000'}
-            valueSuffix={'%'}
-          /> */}
+          <View width={'100%'} alignItems={'center'}>
+            <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
+            <Text style={{fontSize:40,textAlign:'center'}}>45%</Text> 
+          </View>
+          {/* <View width={'100%'} alignItems={'center'}>
+            <CircularProgress
+              value={50}
+              radius={100}
+              inActiveStrokeColor={'#FFFFFF'}
+              activeStrokeColor={'#97C593'}
+              activeStrokeWidth={30}
+              inActiveStrokeWidth={30}
+              inActiveStrokeOpacity={0.2}
+              progressValueColor={'#000000'}
+              valueSuffix={'%'}
+            />
+          </View> */}
 
-          <View width={'100%'} alignItems={'baseline'}>
+          <View style={{flexShrink:1,padding:10}}>
             <Text style={styles.text_creditos}>Créditos cursados:</Text>
             <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
             <Text style={styles.text_creditos2}>Fundamentación optativas:</Text>
@@ -58,11 +69,7 @@ const AcademicScreen = () => {
         <View style={styles.asignaturas}>
           <View style={styles.row} margin={'10%'}>
             <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
-            <TouchableOpacity>
-              <View>
-                <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
-              </View>
-            </TouchableOpacity>
+
           </View>
             <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
@@ -104,6 +111,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 20,
     margin: '5%',
+    textAlign:'center'
   },
   text_creditos: {
     color: 'black',
@@ -133,6 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "center",
     alignItems: 'center',
+    flex:1,
   },
   student: {
     borderRadius: 20,
@@ -158,16 +167,19 @@ const styles = StyleSheet.create({
     width: '90%',
     // height: 100,
     margin: 10,
+    padding:10,
     justifyContent: "center",
   },
   promedio: {
     borderRadius: 30,
     backgroundColor: '#D9D9D9',
     width: '90%',
-    height: 100,
+    padding:50,
     margin: 5,
     alignItems:'center',
-    justifyContent: 'center'
+    justifyContent: 'space-evenly',
+    flex:1,
+    flexDirection:'row',
   },
   creditos: {
     borderRadius: 30,
@@ -176,7 +188,7 @@ const styles = StyleSheet.create({
     // height: 500,
     margin: 5,
     marginBottom: 10,
-    alignItems:'baseline',
+    
     justifyContent: 'flex-start'
   },
   asignaturas: {
@@ -200,8 +212,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     flex:1,
-
-    
   },
   nota_asignatura: {
     borderTopRightRadius:30,
