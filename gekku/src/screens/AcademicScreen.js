@@ -1,36 +1,74 @@
 import React from 'react';
-import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView,} from 'react-native';
-import CircularProgress from 'react-native-circular-progress-indicator';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ScrollView
+} from 'react-native';
+// import CircularProgress from 'react-native-circular-progress-indicator';
+
+import ErrorMessage from '../components/ErrorMessage';
+import { UserContext } from '../context/UserContext';
 
 const a = [3, 4, 3, 3, 2];
 
-
 const AcademicScreen = () => {
-  const progress = 0.75; // Define el progreso de la barra (valor entre 0 y 1)
-  const radius = 100; // Define el radio del círculo de progreso
-  const strokeWidth = 10; // Define el grosor del borde de la barra de progreso
+  const [token, ] = useContext(UserContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [university, setUniversity] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    getStudentInfo();
+  }, []);
+
+  const getStudentInfo = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    };
+
+    const response = await fetch("http://localhost:8000/api/students/me", requestOptions)
+
+    if(!response.ok) {
+      setErrorMessage("Could not get the profile information");
+    } else {
+      const data = await response.json();
+      setName(data.name);
+      setEmail(data.email);
+      setUniversity(data.university);
+    }
+  }
+  
   return (
     <ScrollView>
       <View style={styles.container}>
-
         <View style={styles.student}>
           <Image style={styles.image} source={require("../../assets/Academic-icon.png")}  />
+          
           <View style={styles.info_Student}>
-            <Text style={styles.text}>Luis david</Text>
-            <Text style={styles.text}>Luis@unal.edu.co</Text>
-            <Text style={styles.text}>Universidad nacional</Text>
+            <ErrorMessage message={errorMessage}/>
+            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.text}>{email}</Text>
+            <Text style={styles.text}>{university}</Text>
             <Text style={styles.text}>Ingenieria de sistemas</Text>
           </View>
         </View>
 
         <View style={styles.promedio}>
             <View >
-              <Text  style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
-              <Text  style={{fontSize:30,textAlign:'center'}}>P.A.P.A</Text> 
-            </View>          
+              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text style={{fontSize:30,textAlign:'center'}}>P.A.P.A</Text> 
+            </View>
+
             <View>
-              <Text  style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
-              <Text  style={{fontSize:30,textAlign:'center'}}>P.A</Text> 
+              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>4.5</Text>
+              <Text style={{fontSize:30,textAlign:'center'}}>P.A</Text> 
             </View>
         </View>
 
@@ -39,6 +77,7 @@ const AcademicScreen = () => {
             <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
             <Text style={{fontSize:40,textAlign:'center'}}>45%</Text> 
           </View>
+
           {/* <View width={'100%'} alignItems={'center'}>
             <CircularProgress
               value={50}
@@ -60,6 +99,7 @@ const AcademicScreen = () => {
             <Text style={styles.text_creditos2}>Disciplinar obligatoria:</Text>
             <Text style={styles.text_creditos2}>Disciplinar optativa:</Text>
             <Text style={styles.text_creditos2}>trabajo de grado:</Text>
+            
             <View justifyContent={'flex-end'}>
               <Text style={styles.text_creditos}>Créditos faltantes</Text>
             </View>
@@ -93,19 +133,16 @@ const AcademicScreen = () => {
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor:'#A5BCA7',
     alignItems: 'center',
-
   },
   text: {
     color: 'black',
     fontSize: 14,
     marginTop: '0.5%',
     marginLeft: 10,
-
   },
   text_p_avance: {
     color: 'black',
@@ -129,19 +166,17 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 25,
     fontWeight: 'bold',
-    
   },
   text_asignaturas2: {
     color: 'white',
     fontSize: 15,
     marginLeft: 15,
-    
   },
   row: {
     flexDirection: 'row',
     justifyContent: "center",
     alignItems: 'center',
-    flex:1,
+    flex: 1,
   },
   student: {
     borderRadius: 20,
@@ -165,27 +200,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     opacity: 0.5,
     width: '90%',
-    // height: 100,
     margin: 10,
-    padding:10,
+    padding: 10,
     justifyContent: "center",
   },
   promedio: {
     borderRadius: 30,
     backgroundColor: '#D9D9D9',
     width: '90%',
-    padding:50,
+    padding: 50,
     margin: 5,
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'space-evenly',
     flex:1,
-    flexDirection:'row',
+    flexDirection: 'row',
   },
   creditos: {
     borderRadius: 30,
     backgroundColor: '#D9D9D9',
     width: '90%',
-    // height: 500,
     margin: 5,
     marginBottom: 10,
     
@@ -195,7 +228,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#D9D9D9',
     width: '90%',
-    // height: 500,
     margin: 5,
     marginBottom: 10,
     alignItems:'center',
@@ -211,11 +243,11 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    flex:1,
+    flex: 1,
   },
   nota_asignatura: {
-    borderTopRightRadius:30,
-    borderBottomRightRadius:30,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
     width:'20%',
     height:'100%',
     backgroundColor: '#8BE189',
@@ -226,6 +258,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
 });
-
 
 export default AcademicScreen;
