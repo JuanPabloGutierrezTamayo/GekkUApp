@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text,TouchableOpacity,Image,Button,ImageBackground,SlidingUpPanel,ScrollView} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
+
+
+const a = [3, 4, 3, 3, 2];
+
 const AcademicScreen = () => {
   return (
     <ScrollView>
@@ -9,10 +13,10 @@ const AcademicScreen = () => {
         <View style={styles.student}>
           <Image style={styles.image} source={require("../../assets/Academic-icon.png")}  />
           <View style={styles.info_Student}>
-            <Text style={styles.text}>Próximas alertas</Text>
-            <Text style={styles.text}>Próximas alertas</Text>
-            <Text style={styles.text}>Próximas alertas</Text>
-            <Text style={styles.text}>Próximas alertas</Text>
+            <Text style={styles.text}>Luis david</Text>
+            <Text style={styles.text}>Luis@unal.edu.co</Text>
+            <Text style={styles.text}>Universidad nacional</Text>
+            <Text style={styles.text}>Ingenieria de sistemas</Text>
           </View>
         </View>
 
@@ -39,14 +43,14 @@ const AcademicScreen = () => {
           />
 
           <View width={'100%'} alignItems={'baseline'}>
-            <Text style={styles.text_creditos}>Porcentaje de avance</Text>
-            <Text style={styles.text_creditos2}>Porcentaje de avance</Text>
-            <Text style={styles.text_creditos2}>Porcentaje de avance</Text>
-            <Text style={styles.text_creditos2}>Porcentaje de avance</Text>
-            <Text style={styles.text_creditos2}>Porcentaje de avance</Text>
-            <Text style={styles.text_creditos2}>Porcentaje de avance</Text>
+            <Text style={styles.text_creditos}>Créditos cursados:</Text>
+            <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
+            <Text style={styles.text_creditos2}>Fundamentación optativas:</Text>
+            <Text style={styles.text_creditos2}>Disciplinar obligatoria:</Text>
+            <Text style={styles.text_creditos2}>Disciplinar optativa:</Text>
+            <Text style={styles.text_creditos2}>trabajo de grado:</Text>
             <View justifyContent={'flex-end'}>
-              <Text style={styles.text_creditos}>Porcentaje de avance</Text>
+              <Text style={styles.text_creditos}>Créditos faltantes</Text>
             </View>
           </View>
         </View>
@@ -54,21 +58,25 @@ const AcademicScreen = () => {
         <View style={styles.asignaturas}>
           <View style={styles.row} margin={'10%'}>
             <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
-            <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
+            <TouchableOpacity>
+              <Image marginLeft={'5%'} source={require("../../assets/AcademicIcons/select.png")}  />
+            </TouchableOpacity>
           </View>
             <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
-          <View style={styles.asignaturas2} flexDirection={'row'}>
-            <View alignItems={'baseline'}>
-              <Text style={styles.text_asignaturas2}>Créditos inscritos:  asdasdadasdasd asdasd as</Text>
-              <Text style={styles.text_asignaturas2}>Créditos inscritos: </Text>
-            </View>
-              <View style={styles.nota_asignatura} >
-                <Text style={styles.text_asignaturas2}> 3.5 </Text>
+          {React.Children.toArray(a.map((creditos) => {
+            return (
+              <View style={styles.asignaturas2} flexDirection={'row'}>
+                <View alignItems={'baseline'} width={'78%'}>
+                  <Text style={styles.text_asignaturas2}>Ciencias de la computacion y aplicaciones moviles </Text>
+                  <Text style={styles.text_asignaturas2} keys={creditos}>Créditos: {creditos} </Text>
+                </View>
+                <View style={styles.nota_asignatura} >
+                  <Text style={styles.text_asignaturas}> 3.5 </Text>
+                </View>
               </View>
-          </View>
-
-
+            );
+          }))}
         </View>
       </View>
     </ScrollView>
@@ -114,9 +122,9 @@ const styles = StyleSheet.create({
     
   },
   text_asignaturas2: {
-    color: 'black',
-    fontSize: 20,
-    marginLeft: 15
+    color: 'white',
+    fontSize: 15,
+    marginLeft: 15,
     
   },
   row: {
