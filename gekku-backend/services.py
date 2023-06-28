@@ -120,6 +120,11 @@ async def get_subjects(history: _schemas.AcademicHistory, db: _orm.Session):
     return list(map(_schemas.Subject.from_orm, subjects))
 
 ## Get subject by semester
+async def get_subject_by_semester(semester:str, history: _schemas.AcademicHistory, db: _orm.Session):
+    subjects = db.query(_models.Subject).filter_by(history_id = history.id).filter_by(semester = semester)
+    return list(map(_schemas.Subject.from_orm, subjects))
+
+
 async def get_semesters(history: _schemas.AcademicHistory, db: _orm.Session):
     query = db.query(_models.Subject.semester.distinct().label("semester")).filter_by(history_id = history.id)
     semesters = [row.semester for row in query.all()]
