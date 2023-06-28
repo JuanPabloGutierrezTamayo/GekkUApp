@@ -42,43 +42,28 @@ const MenuScreen = ({ navigation }) => {
   
     <ScrollView contentContainerStyle={{ flex: 1 }}>
         <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} style={styles.container}>
-          <View style={styles.menu}>
             <View style={styles.row}>
-              <TouchableOpacity onPress={() => navigation.navigate("Academic")}>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]} onPress={() => navigation.navigate("Academic")}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
-                </View>
               </TouchableOpacity> 
-              <TouchableOpacity>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/calc.png")} />
-                </View>
               </TouchableOpacity> 
-              <TouchableOpacity>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/event.png")} />
-                </View>
               </TouchableOpacity> 
             </View>
             <View style={styles.row}>
-              <TouchableOpacity>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/not.png")} />
-                </View>
               </TouchableOpacity> 
-              <TouchableOpacity>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/bus.png")} />
-                </View>
               </TouchableOpacity> 
-              <TouchableOpacity>
-                <View style={styles.item} >
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/map.png")} />
-                </View>
               </TouchableOpacity> 
             </View>
-            
-          </View>
           
           <View style={styles.notification}>
             <Text style={styles.text}>Próximas alertas</Text>
@@ -161,17 +146,23 @@ const styles = StyleSheet.create({
   },
   menu: {
     marginTop: 40,
+    width:'100%',
     alignItems: 'center',
     justifyContent: "center",
+    
   },
   row: {
+    marginTop: '5%',
     flexDirection: 'row',
+    width:'100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   item: {
     borderRadius: 20,
-    width: 55,
-    height: 55,
-    margin: 10,
+    marginLeft:'5%',
+    marginRight:'5%',
+    height: 60,
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: "center",
