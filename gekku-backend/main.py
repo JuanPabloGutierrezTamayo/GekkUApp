@@ -4,6 +4,7 @@ import fastapi.security as _security
 import sqlalchemy.orm as _orm
 import database as _database
 import services as _services, schemas as _schemas
+from fastapi.responses import JSONResponse
 from typing import List
 
 app = _fastapi.FastAPI()
@@ -52,7 +53,7 @@ async def delete_alert(alert_id: int, student: _schemas.Student = _fastapi.Depen
 
 # Update Alert
 @app.put("/api/alerts/{alert_id}", status_code=200)
-async def update_alert(alert_id: int,alert: _schemas.AlertCreate,student: _schemas.Student = _fastapi.Depends(_services.get_current_student),db: _orm.Session = _fastapi.Depends(_services.get_db)):
+async def update_alert(alert_id: int, alert: _schemas.AlertCreate,student: _schemas.Student = _fastapi.Depends(_services.get_current_student),db: _orm.Session = _fastapi.Depends(_services.get_db)):
     await _services.update_alert(alert_id, alert, student, db)
     return {"message", "Successfully Updated"}
 
@@ -72,3 +73,15 @@ async def get_history(student: _schemas.Student = _fastapi.Depends(_services.get
 async def get_subject(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
     history = await get_history(student=student, db=db)
     return await _services.get_subjects(history=history, db=db)
+
+# Get subject by semester
+@app.get("/api/subjects/{semester}", response_model=list[_schemas.Subject])
+async def get_subject_by_semester(semester: str, student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    history = await get_history(student=student, db=db)
+    return await _services.get_subject_by_semester(semester, history=history, db=db)
+
+# Get semesters
+@app.get("/api/semesters")
+async def get_semesters(student: _schemas.Student = _fastapi.Depends(_services.get_current_student), db: _orm.Session=_fastapi.Depends(_services.get_db)):
+    history = await get_history(student=student, db=db)
+    return (await _services.get_semesters(history=history, db=db))
