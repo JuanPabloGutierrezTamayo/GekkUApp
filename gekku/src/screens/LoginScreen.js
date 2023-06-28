@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Image,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -26,26 +27,28 @@ const LoginScreen = ({ navigation }) => {
   const changeText = () => count >= functions.length - 1 ? setCount(0) : setCount(count + 1);
 
   return (
-    <View style={loginStyles.container}>
-      <StatusBar style="auto" />
+    // <ScrollView>
+      <View style={loginStyles.container}>
+        <StatusBar style="auto" />
 
-      <Image style={loginStyles.image} source={require("../../assets/icon.png")} />
-      <Text style={loginStyles.name}>GekkU</Text>
-      <Text style={loginStyles.description}>
-        ¡Bienvenido a GekkU! Tu aplicación de confianza para el manejo de tu
-        información académica y otra información relevante. Aquí podrás:
-      </Text>
+        <Image style={loginStyles.image} source={require("../../assets/icon.png")} />
+        <Text style={loginStyles.name}>GekkU</Text>
+        <Text style={loginStyles.description}>
+          ¡Bienvenido a GekkU! Tu aplicación de confianza para el manejo de tu
+          información académica y otra información relevante. Aquí podrás:
+        </Text>
 
-      <TouchableOpacity onPress={changeText} style={loginStyles.card}>
-        <Text style={loginStyles.textCard}>{functions[count]}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={changeText} style={loginStyles.card}>
+          <Text style={loginStyles.textCard}>{functions[count]}</Text>
+        </TouchableOpacity>
 
-      <View style={loginStyles.line} />
+        <View style={loginStyles.line} />
 
-      <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
-      
-      <Login navigation={navigation} />
-    </View> 
+        <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
+        
+        <Login navigation={navigation} />
+      </View>
+    // {/* </ScrollView> */}
   );
 }
 
@@ -57,7 +60,7 @@ const loginStyles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    marginBottom: 20,
+    marginBottom: 10,
     width: "35%",
     height: "16%",
     resizeMode: "contain",
@@ -65,7 +68,7 @@ const loginStyles = StyleSheet.create({
   name: {
     fontSize: 30,
     fontWeight: "bold",
-    marginBottom: "5%"
+    marginBottom: "2%"
   },
   description: {
     width: "85%",
@@ -75,8 +78,8 @@ const loginStyles = StyleSheet.create({
     textAlign: "center",
   },
   card: {
-    width: "70%",
-    height: 60,
+    width: "60%",
+    height: 50,
     justifyContent: "center",
     backgroundColor: "#2D5C44",
     borderRadius: 10,
@@ -85,7 +88,7 @@ const loginStyles = StyleSheet.create({
     width: "100%",
     margin: "1%",
     padding: "2%",
-    fontSize: 16,
+    fontSize: 14,
     color: "#FFF",
     textAlign: "center",
   },
@@ -97,7 +100,7 @@ const loginStyles = StyleSheet.create({
     borderStyle: "dashed",
   },
   text: {
-    fontSize: 19,
+    fontSize: 17,
     fontWeight: "600",
     // marginBottom: 4,
     textAlign: "center",

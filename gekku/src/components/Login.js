@@ -9,7 +9,6 @@ import {
 import CheckBox from "expo-checkbox";
 import { Formik } from 'formik'
 
-import ErrorMessage from './ErrorMessage';
 import { UserContext } from '../context/UserContext';
 
 const Login = ({ navigation }) => {
@@ -82,9 +81,7 @@ const Login = ({ navigation }) => {
             <Text style={styles.loginText}>Iniciar sesión sin conexión</Text>
           </Pressable>
         </View>
-
       )}
-      
     </Formik>
   );
 }
@@ -93,8 +90,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    marginTop: "5%",
+    marginTop: "2%",
     alignItems: "center",
+    justifyContent: "center",
   },
   inputView: {
     backgroundColor: "#fff",
@@ -113,14 +111,13 @@ const styles = StyleSheet.create({
   loginBtn: {
     width: "40%",
     borderRadius: 10,
-    height: 45,
+    height: 40,
     alignItems: "center",
     justifyContent: "center",
-    margin: "5%",
+    margin: "1%",
     backgroundColor: "#37AD5F",
   },
   login2Btn: {
-    margin: "1%",
     backgroundColor: "#00796B",
   },
   loginText: {
@@ -131,6 +128,7 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 10,
   },
   checkbox: {
     margin: 5,

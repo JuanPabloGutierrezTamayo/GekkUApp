@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState} from 'react';
 import {
-  View,
+  Image,
+  ScrollView,
   StyleSheet,
   Text,
-  Image,
-  ScrollView
+  View,
 } from 'react-native';
 // import CircularProgress from 'react-native-circular-progress-indicator';
 
@@ -20,11 +20,13 @@ const AcademicScreen = () => {
   const [university, setUniversity] = useState("");
   const [pa, setPA] = useState(0);
   const [papa, setPAPA] = useState(0);
+  const [totalCredits, setTotalCredits] = useState(0);
+  const [completedCredits, setCompletedCredits] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getStudentInfo();
-    getGrades();
+    getAcademicHistory();
   }, []);
 
   const getStudentInfo = async () => {
@@ -48,7 +50,7 @@ const AcademicScreen = () => {
     }
   }
   
-  const getGrades = async () => {
+  const getAcademicHistory = async () => {
     const requestOptions = {
       method: "GET",
       headers: {
@@ -65,6 +67,8 @@ const AcademicScreen = () => {
       const data = await response.json();
       setPA(data.pa);
       setPAPA(data.papa);
+      setTotalCredits(data.total_credits);
+      setCompletedCredits(data.completed_credits);
     }
   }
 
@@ -104,7 +108,7 @@ const AcademicScreen = () => {
         <View style={styles.creditos}>
           <View width={'100%'} alignItems={'center'}>
             <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
-            <Text style={{fontSize:40,textAlign:'center'}}>45%</Text> 
+            <Text style={{fontSize:40,textAlign:'center'}}>{completedCredits / totalCredits * 100}%</Text> 
           </View>
 
           {/* <View width={'100%'} alignItems={'center'}>
@@ -122,15 +126,15 @@ const AcademicScreen = () => {
           </View> */}
 
           <View style={{flexShrink:1,padding:10}}>
-            <Text style={styles.text_creditos}>Créditos cursados:</Text>
-            <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
+            <Text style={styles.text_creditos}>Créditos cursados: {completedCredits}</Text>
+            {/* <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
             <Text style={styles.text_creditos2}>Fundamentación optativas:</Text>
             <Text style={styles.text_creditos2}>Disciplinar obligatoria:</Text>
             <Text style={styles.text_creditos2}>Disciplinar optativa:</Text>
-            <Text style={styles.text_creditos2}>trabajo de grado:</Text>
+            <Text style={styles.text_creditos2}>trabajo de grado:</Text> */}
             
             <View justifyContent={'flex-end'}>
-              <Text style={styles.text_creditos}>Créditos faltantes</Text>
+              <Text style={styles.text_creditos}>Créditos faltantes: {totalCredits - completedCredits}</Text>
             </View>
           </View>
         </View>
