@@ -98,14 +98,23 @@ const MenuScreen = ({ navigation }) => {
             <Text style={styles.text}>Próximas clases</Text>
 
             <View style={styles.item_notifcaciones2}>
-
               <View style={styles.item_notifcaciones3}>
                 <Text style={styles.text_notificacion2}>CCAM</Text>
                 <Text style={styles.text_notificacion2}>27/06/2023</Text>
                 <Text style={styles.text_notificacion}>M8-201</Text>
               </View>
 
+              <View style={styles.item_notifcaciones3}>
+                <Text style={styles.text_notificacion2}>Creación multimedia</Text>
+                <Text style={styles.text_notificacion2}>27/06/2023</Text>
+                <Text style={styles.text_notificacion}>M8-202</Text>
+              </View>
 
+              <View style={styles.item_notifcaciones3}>
+                <Text style={styles.text_notificacion2}>Cálculo diferencial</Text>
+                <Text style={styles.text_notificacion2}>28/06/2023</Text>
+                <Text style={styles.text_notificacion}>12-201</Text>
+              </View>
             </View>
           </View>
         </ImageBackground>
