@@ -1,99 +1,123 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
   Image,
-  ImageBackground
+  ImageBackground,
+  ScrollView
 } from 'react-native';
 
 import { UserContext } from '../context/UserContext';
 
 const MenuScreen = ({ navigation }) => {
   const [token, setToken] = useContext(UserContext);
+  const [events, setEvent] = useState([]);
 
+  useEffect(() => {
+    getEventInfo();
+  }, []);
+
+  const getEventInfo = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    };
+
+    const response = await fetch("http://localhost:8000/api/alerts/", requestOptions)
+
+    if(!response.ok) {
+      setErrorMessage("Could not get the event information");
+    } else {
+      const data = await response.json();
+      setEvent(data);
+    }
+  }
   return (
-    <View style={styles.container}>
-
-      <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} resizeMode="cover" style={styles.container}>
-
-        <View style={styles.menu}>
-          <View style={styles.row}>
-            <TouchableOpacity onPress={() => navigation.navigate("Academic")}>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
-              </View>
-            </TouchableOpacity> 
-            <TouchableOpacity>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/calc.png")} />
-              </View>
-            </TouchableOpacity> 
-            <TouchableOpacity>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/event.png")} />
-              </View>
-            </TouchableOpacity> 
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/not.png")} />
-              </View>
-            </TouchableOpacity> 
-            <TouchableOpacity>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/bus.png")} />
-              </View>
-            </TouchableOpacity> 
-            <TouchableOpacity>
-              <View style={styles.item} >
-                <Image style={styles.image} source={require("../../assets/MenuIcons/map.png")} />
-              </View>
-            </TouchableOpacity> 
+    
+    <ScrollView >
+      <View style={styles.container}>
+        <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} resizeMode="cover" >
+          <View style={styles.menu}>
+            <View style={styles.row}>
+              <TouchableOpacity onPress={() => navigation.navigate("Academic")}>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
+                </View>
+              </TouchableOpacity> 
+              <TouchableOpacity>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/calc.png")} />
+                </View>
+              </TouchableOpacity> 
+              <TouchableOpacity>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/event.png")} />
+                </View>
+              </TouchableOpacity> 
+            </View>
+            <View style={styles.row}>
+              <TouchableOpacity>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/not.png")} />
+                </View>
+              </TouchableOpacity> 
+              <TouchableOpacity>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/bus.png")} />
+                </View>
+              </TouchableOpacity> 
+              <TouchableOpacity>
+                <View style={styles.item} >
+                  <Image style={styles.image} source={require("../../assets/MenuIcons/map.png")} />
+                </View>
+              </TouchableOpacity> 
+            </View>
+            
           </View>
           
-        </View>
-        
-      <View style={styles.notification}>
-        <Text style={styles.text}>Próximas alertas</Text>
-        <View style={styles.item_notifcaciones}>
+          <View style={styles.notification}>
+            <Text style={styles.text}>Próximas alertas</Text>
+            <View style={styles.item_notifcaciones}>
 
-          <View style={styles.item_notifcaciones3}>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion}>Próximas alertas</Text>
+              {events.map((events) => {
+                return (
+                  <View style={styles.item_notifcaciones3} key={events.id}>
+                    <Text style={styles.text_notificacion2}>{events.title} - {events.topic}</Text>
+                    <Text style={styles.text_notificacion2}>{events.date}</Text>
+                    <Text style={styles.text_notificacion}>{events.note}</Text>
+                  </View>
+                );
+              })}
+            </View>
+
+            <Text style={styles.text}>Próximas clases</Text>
+
+            <View style={styles.item_notifcaciones2}>
+
+              <View style={styles.item_notifcaciones3}>
+                <Text style={styles.text_notificacion2}>CCAM</Text>
+                <Text style={styles.text_notificacion2}>27/06/2023</Text>
+                <Text style={styles.text_notificacion}>M8-201</Text>
+              </View>
+
+
+            </View>
           </View>
-
-          <View style={styles.item_notifcaciones3}>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion}>Próximas alertas</Text>
-          </View>
-            
-        </View>
-
-        <Text style={styles.text}>Próximas clases</Text>
-
-        <View style={styles.item_notifcaciones2}>
-
-          <View style={styles.item_notifcaciones3}>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion2}>Próximas alertas</Text>
-            <Text style={styles.text_notificacion}>Próximas alertas</Text>
-          </View>
-
-        </View>
+        </ImageBackground>
       </View>
-    </ImageBackground>
-  </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
   },
   text: {
     color: 'white',
@@ -138,18 +162,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: "center",
+
   },
   notification: {
     width: '90%',
-    height: '65%',
+    
     alignItems: 'center',
-    justifyContent: "center",
+    justifyContent: 'flex-end',
     margin: '5%',
   },
   item_notifcaciones: {
     borderRadius: 15,
     width: '100%',
-    height: '50%',
     margin: 10,
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
@@ -163,13 +187,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
     justifyContent: 'center',
+    padding:10,
+    flex:1,
   },
   item_notifcaciones3: {
     borderRadius: 15,
     width: '90%',
-    height: 75,
     margin: 20,
+    padding:10,
     backgroundColor: '#484848',
+    flex:1,
   },
 });
 
