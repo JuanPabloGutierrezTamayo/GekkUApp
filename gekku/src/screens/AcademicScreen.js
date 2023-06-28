@@ -86,7 +86,7 @@ const AcademicScreen = () => {
                 <Text style={styles.text}>{name}</Text>
                 <Text style={styles.text}>{email}</Text>
                 <Text style={styles.text}>{university}</Text>
-                <Text style={styles.text}>Ingenieria de sistemas</Text>
+                <Text style={styles.text}>Ingeniería de sistemas</Text>
               </>
             }
             
@@ -127,24 +127,16 @@ const AcademicScreen = () => {
 
           <View style={{flexShrink:1,padding:10}}>
             <Text style={styles.text_creditos}>Créditos cursados: {completedCredits}</Text>
-            {/* <Text style={styles.text_creditos2}>Fundamentación obligatoria:</Text>
-            <Text style={styles.text_creditos2}>Fundamentación optativas:</Text>
-            <Text style={styles.text_creditos2}>Disciplinar obligatoria:</Text>
-            <Text style={styles.text_creditos2}>Disciplinar optativa:</Text>
-            <Text style={styles.text_creditos2}>trabajo de grado:</Text> */}
-            
-            <View justifyContent={'flex-end'}>
-              <Text style={styles.text_creditos}>Créditos faltantes: {totalCredits - completedCredits}</Text>
-            </View>
+            <Text style={styles.text_creditos}>Créditos faltantes: {totalCredits - completedCredits}</Text>
           </View>
         </View>
 
         <View style={styles.asignaturas}>
           <View style={styles.row} margin={'10%'}>
             <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
-
           </View>
-            <Text style={styles.text_creditos}>Créditos inscritos: </Text>
+
+          <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
           {React.Children.toArray(a.map((creditos) => {
             return (
@@ -173,20 +165,21 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 18,
     marginTop: '0.5%',
     marginLeft: 10,
   },
   text_p_avance: {
     color: 'black',
     fontSize: 20,
-    margin: '5%',
+    marginTop: '5%',
+    marginBottom: '2%',
     textAlign:'center'
   },
   text_creditos: {
     color: 'black',
     fontSize: 20,
-    margin: '2%',
+    margin: '1%',
     marginLeft: 20
   },
   text_creditos2: {
@@ -223,8 +216,8 @@ const styles = StyleSheet.create({
   },
   image: {
     margin: 5,
-    width: '40%',
-    height: '40%',
+    width: '30%',
+    height: '30%',
     justifyContent: "center",
     resizeMode: 'contain'
   },
