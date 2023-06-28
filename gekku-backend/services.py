@@ -114,6 +114,13 @@ async def get_history(career: _schemas.Career, db: _orm.Session):
     return _schemas.AcademicHistory.from_orm(history)
 
 # Subject
+## Get all subjects
 async def get_subjects(history: _schemas.AcademicHistory, db: _orm.Session):
     subjects = db.query(_models.Subject).filter_by(history_id = history.id)
     return list(map(_schemas.Subject.from_orm, subjects))
+
+## Get subject by semester
+async def get_semesters(history: _schemas.AcademicHistory, db: _orm.Session):
+    query = db.query(_models.Subject.semester.distinct().label("semester")).filter_by(history_id = history.id)
+    semesters = [row.semester for row in query.all()]
+    return semesters
