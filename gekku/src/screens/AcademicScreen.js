@@ -100,7 +100,7 @@ const AcademicScreen = () => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.student}>
           <Image style={styles.image} source={require("../../assets/Academic-icon.png")}  />

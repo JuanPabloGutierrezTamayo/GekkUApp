@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  ScrollView
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 
 import { UserContext } from '../context/UserContext';
@@ -38,10 +39,9 @@ const MenuScreen = ({ navigation }) => {
     }
   }
   return (
-    
-    <ScrollView >
-      <View style={styles.container}>
-        <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} resizeMode="cover" >
+  
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} style={styles.container}>
           <View style={styles.menu}>
             <View style={styles.row}>
               <TouchableOpacity onPress={() => navigation.navigate("Academic")}>
@@ -94,7 +94,9 @@ const MenuScreen = ({ navigation }) => {
                 );
               })}
             </View>
+          </View>
 
+          <View style={styles.notification}>
             <Text style={styles.text}>Próximas clases</Text>
 
             <View style={styles.item_notifcaciones2}>
@@ -118,15 +120,17 @@ const MenuScreen = ({ navigation }) => {
             </View>
           </View>
         </ImageBackground>
-      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    
+    height:'100%',
+    resizeMode:'cover',
+    flex:1,
+    alignItems:'center',
+    justifyContent:'space-between'
   },
   text: {
     color: 'white',
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   },
   image: {
     margin: 20,
-    width: '75%',
+    width: '80%',
     height: '80%',
     justifyContent: "center",
     resizeMode: 'contain',
@@ -175,9 +179,7 @@ const styles = StyleSheet.create({
   },
   notification: {
     width: '90%',
-    
     alignItems: 'center',
-    justifyContent: 'flex-end',
     margin: '5%',
   },
   item_notifcaciones: {
@@ -191,13 +193,13 @@ const styles = StyleSheet.create({
   item_notifcaciones2: {
     borderRadius: 15,
     width: '100%',
-    height: '30%',
     margin: 10,
     backgroundColor: '#D9D9D9',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     padding:10,
-    flex:1,
+    flex:1
+
   },
   item_notifcaciones3: {
     borderRadius: 15,
@@ -205,7 +207,7 @@ const styles = StyleSheet.create({
     margin: 20,
     padding:10,
     backgroundColor: '#484848',
-    flex:1,
+
   },
 });
 
