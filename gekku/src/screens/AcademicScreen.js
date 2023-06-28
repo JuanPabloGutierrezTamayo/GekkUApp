@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { v4 } from 'uuid';
 // import CircularProgress from 'react-native-circular-progress-indicator';
 
 import ErrorMessage from '../components/ErrorMessage';
@@ -22,11 +23,13 @@ const AcademicScreen = () => {
   const [papa, setPAPA] = useState(0);
   const [totalCredits, setTotalCredits] = useState(0);
   const [completedCredits, setCompletedCredits] = useState(0);
+  const [subjects, setSubjects] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getStudentInfo();
     getAcademicHistory();
+    getSubjects();
   }, []);
 
   const getStudentInfo = async () => {
@@ -69,6 +72,30 @@ const AcademicScreen = () => {
       setPAPA(data.papa);
       setTotalCredits(data.total_credits);
       setCompletedCredits(data.completed_credits);
+    }
+  }
+
+  const getSubjects = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/api/subjects/2023-1", requestOptions);
+
+      if(!response.ok) {
+        setErrorMessage("Could not get the information");
+      } else {
+        const data = await response.json();
+        setSubjects(data);
+      }
+    } catch (e) {
+      setErrorMessage("Could not get the information");
+      console.error(e);
     }
   }
 
@@ -138,7 +165,7 @@ const AcademicScreen = () => {
 
           <Text style={styles.text_creditos}>Créditos inscritos: </Text>
 
-          {React.Children.toArray(a.map((creditos) => {
+          {/* {React.Children.toArray(a.map((creditos) => {
             return (
               <View style={styles.asignaturas2}>
                 <View style={{flexShrink:1,padding:10}} >
@@ -149,8 +176,20 @@ const AcademicScreen = () => {
                   <Text style={styles.text_asignaturas}> 3.5 </Text>
                 </View>
               </View>
-            );
-          }))}
+              );
+            }))} */}
+          {subjects.map((subject) => (
+            <View style={styles.asignaturas2} key={subject.code}>
+              <View style={{ flexShrink: 1, padding: 10 }}>
+                <Text style={styles.text_asignaturas2}>{subject.name}</Text>
+                <Text style={styles.text_asignaturas2}>Créditos: {subject.credits}</Text>
+              </View>
+
+              <View style={styles.nota_asignatura}>
+                <Text style={styles.text_asignaturas}>{subject.final_grade}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       </View>
     </ScrollView>
