@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Image,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -20,35 +19,31 @@ const functions = [
 ]
 
 const LoginScreen = ({ navigation }) => {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
   const [count, setCount] = useState(0);
 
   const changeText = () => count >= functions.length - 1 ? setCount(0) : setCount(count + 1);
 
   return (
-    // <ScrollView>
-      <View style={loginStyles.container}>
-        <StatusBar style="auto" />
+    <View style={loginStyles.container}>
+      <StatusBar style="auto" />
 
-        <Image style={loginStyles.image} source={require("../../assets/icon.png")} />
-        <Text style={loginStyles.name}>GekkU</Text>
-        <Text style={loginStyles.description}>
-          ¡Bienvenido a GekkU! Tu aplicación de confianza para el manejo de tu
-          información académica y otra información relevante. Aquí podrás:
-        </Text>
+      <Image style={loginStyles.image} source={require("../../assets/icon.png")} />
+      <Text style={loginStyles.name}>GekkU</Text>
+      <Text style={loginStyles.description}>
+        ¡Bienvenido a GekkU! Tu aplicación de confianza para el manejo de tu
+        información académica y otra información relevante. Aquí podrás:
+      </Text>
 
-        <TouchableOpacity onPress={changeText} style={loginStyles.card}>
-          <Text style={loginStyles.textCard}>{functions[count]}</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={changeText} style={loginStyles.card}>
+        <Text style={loginStyles.textCard}>{functions[count]}</Text>
+      </TouchableOpacity>
 
-        <View style={loginStyles.line} />
+      <View style={loginStyles.line} />
 
-        <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
-        
-        <Login navigation={navigation} />
-      </View>
-    // {/* </ScrollView> */}
+      <Text style={loginStyles.text}>Inicia sesión con tu cuenta del SIA</Text>
+      
+      <Login navigation={navigation} />
+    </View>
   );
 }
 

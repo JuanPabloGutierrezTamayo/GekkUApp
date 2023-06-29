@@ -14,8 +14,8 @@ import { UserContext } from '../context/UserContext';
 const Login = ({ navigation }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [token, setToken] = useContext(UserContext);
+  const [, setErrorMessage] = useState("");
+  const [, setToken] = useContext(UserContext);
 
   const [isSelected, setSelection] = useState(false);
 
