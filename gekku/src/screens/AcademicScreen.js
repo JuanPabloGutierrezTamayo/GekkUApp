@@ -85,7 +85,7 @@ const AcademicScreen = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/subjects/2023-1", requestOptions);
+      const response = await fetch("http://localhost:8000/api/subjects/2018-2S", requestOptions);
 
       if(!response.ok) {
         setErrorMessage("Could not get the information");
