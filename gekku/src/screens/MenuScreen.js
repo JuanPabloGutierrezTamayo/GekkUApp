@@ -43,7 +43,7 @@ const MenuScreen = ({ navigation }) => {
     <ScrollView contentContainerStyle={{ flex: 1 }}>
         <ImageBackground source={require("../../assets/MenuIcons/background_menu.png")} style={styles.container}>
             <View style={styles.row}>
-              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]} onPress={() => navigation.navigate("Academic")}>
+              <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]} onPress={() => navigation.navigate("Academic Information")}>
                   <Image style={styles.image} source={require("../../assets/MenuIcons/info.png")} />
               </TouchableOpacity> 
               <TouchableOpacity style={[styles.item, { flexBasis: '20%' }]}>
