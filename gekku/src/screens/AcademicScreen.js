@@ -6,13 +6,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import { v4 } from 'uuid';
 // import CircularProgress from 'react-native-circular-progress-indicator';
 
 import ErrorMessage from '../components/ErrorMessage';
 import { UserContext } from '../context/UserContext';
-
-const a = [3, 4, 3, 3, 2];
 
 const AcademicScreen = () => {
   const [token, ] = useContext(UserContext);
@@ -23,14 +20,16 @@ const AcademicScreen = () => {
   const [papa, setPAPA] = useState(0);
   const [totalCredits, setTotalCredits] = useState(0);
   const [completedCredits, setCompletedCredits] = useState(0);
+  const [semester, setSemester] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     getStudentInfo();
     getAcademicHistory();
+    getSemester();
     getSubjects();
-  }, []);
+  }, [semester]);
 
   const getStudentInfo = async () => {
     const requestOptions = {
@@ -75,6 +74,30 @@ const AcademicScreen = () => {
     }
   }
 
+  const getSemester = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/api/semesters", requestOptions);
+
+      if(!response.ok) {
+        setErrorMessage("Could not get the information");
+      } else {
+        const data = await response.json();
+        setSemester(data[0]);
+      }
+    } catch (e) {
+      setErrorMessage("Could not get the information");
+      console.error(e);
+    }
+  }
+
   const getSubjects = async () => {
     const requestOptions = {
       method: "GET",
@@ -85,7 +108,7 @@ const AcademicScreen = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/subjects/2018-2S", requestOptions);
+      const response = await fetch(`http://localhost:8000/api/subjects/${semester}`, requestOptions);
 
       if(!response.ok) {
         setErrorMessage("Could not get the information");
@@ -122,7 +145,7 @@ const AcademicScreen = () => {
 
         <View style={styles.promedio}>
             <View >
-              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>{parseFloat(papa)}</Text>
+              <Text style={{fontSize:40,textAlign:'center',fontWeight: 'bold'}}>{parseFloat(papa).toFixed(1)}</Text>
               <Text style={{fontSize:30,textAlign:'center'}}>P.A.P.A</Text> 
             </View>
 
@@ -135,7 +158,7 @@ const AcademicScreen = () => {
         <View style={styles.creditos}>
           <View width={'100%'} alignItems={'center'}>
             <Text style={styles.text_p_avance}>Porcentaje de avance</Text>
-            <Text style={{fontSize:40,textAlign:'center'}}>{completedCredits / totalCredits * 100}%</Text> 
+            <Text style={{fontSize:40,textAlign:'center'}}>{parseFloat(completedCredits / totalCredits * 100).toFixed(2)}%</Text> 
           </View>
 
           {/* <View width={'100%'} alignItems={'center'}>
@@ -160,24 +183,11 @@ const AcademicScreen = () => {
 
         <View style={styles.asignaturas}>
           <View style={styles.row} margin={'10%'}>
-            <Text style={styles.text_asignaturas}>Semestre 2023-1</Text>
+            <Text style={styles.text_asignaturas}>Semestre {semester}</Text>
           </View>
 
-          <Text style={styles.text_creditos}>Créditos inscritos: </Text>
+          <Text style={styles.text_creditos}>Créditos inscritos:</Text>
 
-          {/* {React.Children.toArray(a.map((creditos) => {
-            return (
-              <View style={styles.asignaturas2}>
-                <View style={{flexShrink:1,padding:10}} >
-                  <Text style={styles.text_asignaturas2}>Ciencias de la computacion y aplicaciones </Text>
-                  <Text style={styles.text_asignaturas2} keys={creditos}>Créditos: {creditos} </Text>
-                </View>
-                <View style={styles.nota_asignatura} >
-                  <Text style={styles.text_asignaturas}> 3.5 </Text>
-                </View>
-              </View>
-              );
-            }))} */}
           {subjects.map((subject) => (
             <View style={styles.asignaturas2} key={subject.code}>
               <View style={{ flexShrink: 1, padding: 10 }}>

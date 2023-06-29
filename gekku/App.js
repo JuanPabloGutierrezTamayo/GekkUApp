@@ -28,7 +28,7 @@ export default function App() {
             component={ MenuScreen }
           />
           <Stack.Screen
-            name="Academic"
+            name="Academic Information"
             component={ AcademicScreen }
           />
         </Stack.Navigator>
