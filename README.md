@@ -26,3 +26,48 @@ El proyecto cuenta con una base de datos de SQLite, un Backend en FastAPI y un F
 La validación y manejo de seguridad de las cuentas de los usuarios se realizó con un token y JWT, pero es importante aclarar que para este MVP no se encriptan las contraseñas por facilidad de la demostración.
 
 Del lado del Backend y la base de datos, se manejan los endpoints necesarios para la consulta de las credenciales e información del estudiante. La creación por el momento se realiza solo desde la base de datos.
+
+---
+
+## ¿Cómo ejecutar el proyecto?
+Es necesario encender tanto el Backend como el Frontend, para ello realizar las siguientes acciones:
+
+### **Encender el Backend:**
+
+Es importante notar que debe tenerse alguna instalación de Python en la máquina.
+
+1. En la carpeta *gekku-backend*, en una consola o terminal, ejecutar el comando 
+
+    <code>Python -m venv venv</code>
+
+    para crear un entorno virtual en donde se ejecutará la aplicación.
+
+2. En la misma consola, ejecutar el comando
+
+    <code>.\venv\Scripts\activate</code> 
+    
+    para abrir el entorno virtual.
+
+3. En esta consola, ahora dentro del entorno virtual, ejecutar el comando
+
+    <code>pip install -r requirements.txt</code>
+
+    para instalar los módulos y librerías necesarios dentro del entorno virtual.
+
+4. Finalmente, una vez terminadas las instalaciones, en la misma consola ejecutar el comando
+
+    <code>uvicorn main:app --reload</code>
+
+### **Encender el Frontend:**
+
+1. En la carpeta *gekku*, en una consola, ejecutar el comando
+
+    <code>npm install</code>
+
+    para instalar las dependencias necesarias*.
+
+2. Finalmente, en esta misma consola o terminal, ejecutar el comando
+
+    <code>npm start</code> ó <code>expo start</code>
+
+Una vez encendidos ambos servicios, el Frontend estará alojado en http://localhost:19006 mientras que los endpoints del bBackend podrán visualizarse usando Swagger en http://localhost:8000/docs#.
