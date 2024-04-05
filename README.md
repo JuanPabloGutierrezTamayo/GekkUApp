@@ -2,6 +2,10 @@
 Repositorio de la última parte del proyecto de la asignatura Ciencias de la Computación y Aplicaciones Móviles.
 
 ---
+#Mockup
+https://www.figma.com/file/TLDQPhCqQNTI7hBkbuwa5O/GekkU---Mockup?type=design&node-id=1-6&mode=design
+En la parte superior izquierda se encuentra un menú desplegable en el cual se muestras las diferentes vistas.
+---
 
 ## ¿Qué es GekkU?
 GekkU surge de la idea de entregarle a los estudiantes de la Universidad Nacional una aplicación para que gestionen su información académica de una manera más cómoda que usando el sistema de información oficial.
